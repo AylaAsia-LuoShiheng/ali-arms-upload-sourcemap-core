@@ -41,6 +41,7 @@ export default function (
   let retryInfo: { [key: string]: number } = {};
 
   const handleUpload = (fileList: string[], index: number) => {
+    if (index > fileList.length - 1) return;
     const fileName = fileList[index];
     const fileData = readFile(outDirFinal + "/" + fileName);
     uploadClient
@@ -60,7 +61,7 @@ export default function (
         // 同一个文件阻塞最大次数， 跳过
         if (retryInfo[fileName] >= maxRetryTimesVal) {
           console.log("failed upload: " + fileName);
-          handleUpload(laterList, 1);
+          index < fileList.length - 1 && handleUpload(laterList, 1);
           return;
         }
         console.log("wait 5 sec...");

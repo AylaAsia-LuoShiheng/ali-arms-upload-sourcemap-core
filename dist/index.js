@@ -34,6 +34,8 @@ function default_1({ clientConfig, uploadDefaultConfig, maxRetryTimes, disabled 
     let laterList = [];
     let retryInfo = {};
     const handleUpload = (fileList, index) => {
+        if (index > fileList.length - 1)
+            return;
         const fileName = fileList[index];
         const fileData = (0, utils_1.readFile)(outDirFinal + "/" + fileName);
         uploadClient
@@ -54,7 +56,7 @@ function default_1({ clientConfig, uploadDefaultConfig, maxRetryTimes, disabled 
             // 同一个文件阻塞最大次数， 跳过
             if (retryInfo[fileName] >= maxRetryTimesVal) {
                 console.log("failed upload: " + fileName);
-                handleUpload(laterList, 1);
+                index < fileList.length - 1 && handleUpload(laterList, 1);
                 return;
             }
             console.log("wait 5 sec...");
