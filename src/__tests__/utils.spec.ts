@@ -1,8 +1,9 @@
 import { readDir, readFile } from "../utils";
+import path from "path";
 
 function testReadDir() {
-  const fileList = readDir(__dirname);
-  if (fileList.includes("utils.spec.js")) {
+  const fileList = readDir(path.resolve(__dirname, ".."));
+  if (fileList.includes("utils.spec.js") && fileList.includes("client.js")) {
     console.log("pass");
   } else {
     console.log("fail: utils=>readDir");
