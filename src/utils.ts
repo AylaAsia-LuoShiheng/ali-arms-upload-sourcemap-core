@@ -8,7 +8,7 @@ export function readDir(dirPath: string) {
     fs.readdirSync(dirPathVal, { withFileTypes: true }).forEach(item => {
       const filePath = path.join(dirPathVal, item.name);
       if (item.isFile()) {
-        fileList.push(item.name);
+        fileList.push(filePath);
       } else if (item.isDirectory()) {
         handleRead(filePath);
       }

@@ -42,8 +42,10 @@ export default function (
 
   const handleUpload = (fileList: string[], index: number) => {
     if (index > fileList.length - 1) return;
-    const fileName = fileList[index];
-    const fileData = readFile(outDirFinal + "/" + fileName);
+    const filePath = fileList[index];
+    const fileData = readFile(filePath);
+    const pathArr = filePath.split("/");
+    const fileName = pathArr[pathArr.length - 1];
     uploadClient
       .main({ fileName, file: fileData })
       .then(() => {

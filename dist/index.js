@@ -36,8 +36,10 @@ function default_1({ clientConfig, uploadDefaultConfig, maxRetryTimes, disabled 
     const handleUpload = (fileList, index) => {
         if (index > fileList.length - 1)
             return;
-        const fileName = fileList[index];
-        const fileData = (0, utils_1.readFile)(outDirFinal + "/" + fileName);
+        const filePath = fileList[index];
+        const fileData = (0, utils_1.readFile)(filePath);
+        const pathArr = filePath.split("/");
+        const fileName = pathArr[pathArr.length - 1];
         uploadClient
             .main({ fileName, file: fileData })
             .then(() => {

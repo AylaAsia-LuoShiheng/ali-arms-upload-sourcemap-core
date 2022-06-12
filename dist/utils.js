@@ -13,7 +13,7 @@ function readDir(dirPath) {
         fs_1.default.readdirSync(dirPathVal, { withFileTypes: true }).forEach(item => {
             const filePath = path_1.default.join(dirPathVal, item.name);
             if (item.isFile()) {
-                fileList.push(item.name);
+                fileList.push(filePath);
             }
             else if (item.isDirectory()) {
                 handleRead(filePath);

@@ -7,7 +7,8 @@ const utils_1 = require("../utils");
 const path_1 = __importDefault(require("path"));
 function testReadDir() {
     const fileList = (0, utils_1.readDir)(path_1.default.resolve(__dirname, ".."));
-    if (fileList.includes("utils.spec.js") && fileList.includes("client.js")) {
+    if (fileList.includes(path_1.default.resolve(__dirname, "utils.spec.js")) &&
+        fileList.includes(path_1.default.resolve(__dirname, "..", "client.js"))) {
         console.log("pass");
     }
     else {
